@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Text Duplicator</title>
+
+<style>
+*{
+    box-sizing:border-box;
+    font-family:Arial,sans-serif;
+}
+
+body{
+    margin:0;
+    background:#111;
+    color:white;
+    padding:20px;
+}
+
+.container{
+    max-width:700px;
+    margin:auto;
+}
+
+h1{
+    text-align:center;
+}
+
+textarea,input{
+    width:100%;
+    margin-top:10px;
+    padding:12px;
+    border:none;
+    border-radius:10px;
+    font-size:16px;
+}
+
+textarea{
+    resize:vertical;
+}
+
+.row{
+    display:flex;
+    gap:10px;
+    margin-top:10px;
+}
+
+button{
+    flex:1;
+    padding:14px;
+    border:none;
+    border-radius:10px;
+    background:#fff;
+    color:#111;
+    font-size:16px;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+button:active{
+    transform:scale(0.98);
+}
+
+label{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    margin-top:15px;
+}
+
+#output{
+    margin-top:15px;
+    min-height:250px;
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+
+<h1>Text Duplicator</h1>
+
+<textarea id="text" rows="5" placeholder="Masukkan teks..."></textarea>
+
+<input type="number" id="count" value="10" min="1" placeholder="Jumlah duplikasi">
+
+<label>
+<input type="checkbox" id="numbering">
+Tambahkan nomor urut
+</label>
+
+<div class="row">
+<button onclick="generate()">Duplikat</button>
+<button onclick="copyText()">Copy</button>
+</div>
+
+<textarea id="output" readonly placeholder="Hasil akan muncul di sini"></textarea>
+
+</div>
+
+<script>
+
+function generate(){
+
+const text=document.getElementById("text").value;
+
+const count=parseInt(document.getElementById("count").value);
+
+const numbering=document.getElementById("numbering").checked;
+
+let result=[];
+
+for(let i=1;i<=count;i++){
+
+if(numbering){
+result.push(i+". "+text);
+}else{
+result.push(text);
+}
+
+}
+
+document.getElementById("output").value=result.join("\n");
+
+}
+
+function copyText(){
+
+const output=document.getElementById("output");
+
+output.select();
+
+document.execCommand("copy");
+
+alert("Berhasil dicopy!");
+
+}
+
+</script>
+
+</body>
+</html>
